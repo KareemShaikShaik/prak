@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<head>
+		<meta charset="UTF-8">
+		<!-- For IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- For Resposive Device -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>PARKJIN</title>
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" sizes="56x56" href="img/icon.png"> 
+
+
+		<!-- Main style sheet -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<!-- responsive style sheet -->
+		<link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+
+		<!-- Fix Internet Explorer ______________________________________-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="vendor/html5shiv.js"></script>
+			<script src="vendor/respond.js"></script>
+		<![endif]-->
+			
+			
+
+	</head>
+
+	<body>
+		<div class="main-page-wrapper">
+
+
+			<!-- Header _________________________________ -->
+			<header class="main-header">
+
+				<!-- _______________________ Theme Menu _____________________ -->
+
+				<div class="container">
+					<div class="main-menu-wrapper clear-fix">
+						<div class="container"><br>
+							<div class="logo float-left"><a href="index1.html" ><img src="img/plogo.png" alt="LOGO" height="30%"></a></div>
+
+							<form action="#" class="float-right">
+								<input type="text" placeholder="Search">
+								<button><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+							</form>
+
+							<!-- Menu -->
+							<nav class="navbar float-right">
+							   <!-- Brand and toggle get grouped for better mobile display -->
+							   <div class="navbar-header">
+							     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+							       <span class="sr-only">Toggle navigation</span>
+							       <span class="icon-bar"></span>
+							       <span class="icon-bar"></span>
+							       <span class="icon-bar"></span>
+							     </button>
+							   </div>
+							   <!-- Collect the nav links, forms, and other content for toggling -->
+							   <div class="collapse navbar-collapse" id="navbar-collapse-1">
+							     <ul class="nav navbar-nav">
+							       <li class="dropdown-holder current-page-item"><a href="ourapp.html">Our App</a>
+									
+							       </li>
+							       <li class="dropdown-holder"><a href="#">Help</a>
+									 <ul class="sub-menu">
+											<li><a href="art1.html" >What if I park outside of my time-frame?</a></li>
+											<li><a href="art2.html" >How do I cancel my pass?</a></li>
+											<li><a href="art3.html" >What's an over-sized vehicle?</a></li>
+											<li><a href="art4.html" >How do I change my time-frame?</a></li>
+											<li><a href="#" >See All Help Questions</a></li>
+
+											</ul>
+										</li>
+									 
+									 
+							       <li class="dropdown-holder"><a href="signin.html">Sign-In</a>
+									 </li>
+							     <li class="dropdown-holder"><a href="logins.html">Login</a>
+									 </li>
+							     </ul>
+								 </ul> 
+							   </div><!-- /.navbar-collapse -->
+							</nav>
+						</div>
+					</div> <!-- /.main-menu-wrapper -->
+				</div>
+	
+
+				</header>
+
+
+<style>
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 10px solid transparent;
+  background-color: #f1f1f1;
+  padding: 15px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+</style>
+</head>     
+
+<body>
+
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      table {
+        font-size: 12px;
+      }
+      #map {
+        height: 440px;
+      }
+  
+      #CarPark {
+        text-align: right;
+        width: 100px;
+        font-size: 14px;
+        top: 270px;
+        z-index: 5;
+        background-color: #fff;
+      }
+      #locationField {
+        position: absolute;
+        
+        height: 25;
+        left: 108px;
+        top: 270px;
+        z-index: 5;
+      }
+      #controls {
+        position: absolute;
+        left: 300px;
+        width: 140px;
+        top: 270px;
+        z-index: 5;
+        background-color: #fff;
+      }
+      #autocomplete {
+        width: 900px;
+      }
+      #country {
+        width: 100%;
+      background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+
+	  }
+      .placeIcon {
+        width: 20px;
+        height: 34px;
+        margin: 4px;
+      }
+      .hotelIcon {
+        width: 24px;
+        height: 24px;
+      }
+      #resultsTable {
+        border: 1px solid black;
+		width: 200px;
+		height: 100px;
+		
+//box-sizing: border-box;
+      }
+      #rating {
+        font-size: 13px;
+        font-family: Arial Unicode MS;
+      }
+      .iw_table_row {
+        height: 18px;
+      }
+      .iw_attribute_name {
+        font-weight: bold;
+        text-align: right;
+      }
+      .iw_table_icon {
+        text-align: right;		
+      }
+	  
+	  .tbody{
+	  width:100px;
+	  height:60px;
+	  
+	  }
+	  
+	  
+	  
+</style>
+	  
+    </style>
+  </head>
+
+  <body>
+  <img src="img/car1.jpg" width="100%">
+
+    <div id="locationField">
+	<h1>  Find Car Park Space </h1> 
+      <input id="autocomplete" placeholder="Enter a city" type="text"/>
+   </div> 
+	<!--
+    <div id="controls">
+      <select id="country">
+        <option value="all">All</option>
+        <option value="au">Australia</option>
+        <option value="br">Brazil</option>
+        <option value="ca">Canada</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="mx">Mexico</option>
+        <option value="nz">New Zealand</option>
+        <option value="it">Italy</option>
+        <option value="za">South Africa</option>
+        <option value="es">Spain</option>
+        <option value="pt">Portugal</option>
+        <option value="ind" selected>INDIA</option>
+        <option value="hyd">Hyderabad</option>
+      </select>
+    </div>			-->
+
+   
+
+    
+
+    <div style="display: none">
+      <div id="info-content">
+        <table>
+          <tr id="iw-url-row" class="iw_table_row">
+            <td id="iw-icon" class="iw_table_icon"></td>
+            <td id="iw-url"></td>
+          </tr>
+          <tr id="iw-address-row" class="iw_table_row">
+            <td class="iw_attribute_name">Address:</td>
+            <td id="iw-address"></td>
+          </tr>
+          <tr id="iw-phone-row" class="iw_table_row">
+            <td class="iw_attribute_name">Telephone:</td>
+            <td id="iw-phone"></td>
+          </tr>
+          <tr id="iw-rating-row" class="iw_table_row">
+            <td class="iw_attribute_name">Rating:</td>
+            <td id="iw-rating"></td>
+          </tr>
+          <tr id="iw-website-row" class="iw_table_row">
+            <td class="iw_attribute_name">Website:</td>
+            <td id="iw-website"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // This example uses the autocomplete feature of the Google Places API.
+      // It allows the user to find all hotels in a given place, within a given
+      // country. It then displays markers for all the hotels returned,
+      // with on-click details for each hotel.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map, places, infoWindow;
+      var markers = [];
+      var autocomplete;
+      var countryRestrict = {'country': 'ind'};
+      var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
+      var hostnameRegexp = new RegExp('^https?://.+?/');
+
+      var countries = {
+        'ind': {
+          center: {lat: 28.704059, lng: 77.102490},
+          zoom: 3
+        },
+        'hyd': {
+          center: {lat: 17.385044, lng: 78.486671},
+          zoom: 5
+        }
+      };
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: countries['ind'].zoom,
+          center: countries['ind'].center,
+          mapTypeControl: false,
+          panControl: false,
+          zoomControl: false,
+          streetViewControl: false
+        });
+
+        infoWindow = new google.maps.InfoWindow({
+          content: document.getElementById('info-content')
+        });
+
+        // Create the autocomplete object and associate it with the UI input control.
+        // Restrict the search to the default country, and to place type "cities".
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */ (
+                document.getElementById('autocomplete')), {
+              types: ['(cities)'],
+              componentRestrictions: countryRestrict
+            });
+        places = new google.maps.places.PlacesService(map);
+
+        autocomplete.addListener('place_changed', onPlaceChanged);
+
+        // Add a DOM event listener to react when the user selects a country.
+        document.getElementById('country').addEventListener(
+            'change', setAutocompleteCountry);
+      }
+
+      // When the user selects a city, get the place details for the city and
+      // zoom the map in on the city.
+      function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        if (place.geometry) {
+          map.panTo(place.geometry.location);
+          map.setZoom(15);
+          search();
+        } else {
+          document.getElementById('autocomplete').placeholder = 'Enter a city';
+        }
+      }
+
+      // Search for hotels in the selected city, within the viewport of the map.
+      function search() {
+        var search = {
+          bounds: map.getBounds(),
+          types: ['lodging']
+        };
+
+        places.nearbySearch(search, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            clearResults();
+            clearMarkers();
+            // Create a marker for each hotel found, and
+            // assign a letter of the alphabetic to each marker icon.
+            for (var i = 0; i < results.length; i++) {
+              var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+              var markerIcon = MARKER_PATH + markerLetter + '.png';
+              // Use marker animation to drop the icons incrementally on the map.
+              markers[i] = new google.maps.Marker({
+                position: results[i].geometry.location,
+                animation: google.maps.Animation.DROP,
+                icon: markerIcon
+              });
+              // If the user clicks a hotel marker, show the details of that hotel
+              // in an info window.
+              markers[i].placeResult = results[i];
+              google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+              setTimeout(dropMarker(i), i * 100);
+              addResult(results[i], i);
+            }
+          }
+        });
+      }
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          if (markers[i]) {
+            markers[i].setMap(null);
+          }
+        }
+        markers = [];
+      }
+
+      // Set the country restriction based on user input.
+      // Also center and zoom the map on the given country.
+      function setAutocompleteCountry() {
+        var country = document.getElementById('country').value;
+        if (country == 'all') {
+          autocomplete.setComponentRestrictions({'country': []});
+          map.setCenter({lat: 28.704059, lng: 77.102490});
+          map.setZoom(6);
+        } else {
+          autocomplete.setComponentRestrictions({'country': country});
+          map.setCenter(countries[country].center);
+          map.setZoom(countries[country].zoom);
+        }
+        clearResults();
+        clearMarkers();
+      }
+
+      function dropMarker(i) {
+        return function() {
+          markers[i].setMap(map);
+        };
+      }
+
+      function addResult(result, i) {
+        var results = document.getElementById('results');
+        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+        var markerIcon = MARKER_PATH + markerLetter + '.png';
+
+        var tr = document.createElement('tr');
+        tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
+        tr.onmouseover = function() {
+          google.maps.event.trigger(markers[i], 'click');
+		  
+        };
+
+        var iconTd = document.createElement('td');
+        var nameTd = document.createElement('td');
+        var icon = document.createElement('img');
+        icon.src = markerIcon;
+        icon.setAttribute('class', 'placeIcon');
+        icon.setAttribute('className', 'placeIcon');
+        var name = document.createTextNode(result.name);
+        iconTd.appendChild(icon);
+        nameTd.appendChild(name);
+        tr.appendChild(iconTd);
+        tr.appendChild(nameTd);
+        results.appendChild(tr);
+      }
+
+      function clearResults() {
+        var results = document.getElementById('results');
+        while (results.childNodes[0]) {
+          results.removeChild(results.childNodes[0]);
+        }
+      }
+
+      // Get the place details for a hotel. Show the information in an info window,
+      // anchored on the marker for the hotel that the user selected.
+      function showInfoWindow() {
+        var marker = this;
+        places.getDetails({placeId: marker.placeResult.place_id},
+            function(place, status) {
+              if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                return;
+              }
+              infoWindow.open(map, marker);
+              buildIWContent(place);
+            });
+      }
+
+      // Load the place information into the HTML elements used by the info window.
+      function buildIWContent(place) {
+        document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+            'src="' + place.icon + '"/>';
+        document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+            '">' + place.name + '</a></b>';
+        document.getElementById('iw-address').textContent = place.vicinity;
+
+        if (place.formatted_phone_number) {
+          document.getElementById('iw-phone-row').style.display = '';
+          document.getElementById('iw-phone').textContent =
+              place.formatted_phone_number;
+        } else {
+          document.getElementById('iw-phone-row').style.display = 'none';
+        }
+
+        // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+        // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+        // for the rating points not achieved.
+        if (place.rating) {
+          var ratingHtml = '';
+          for (var i = 0; i < 5; i++) {
+            if (place.rating < (i + 0.5)) {
+              ratingHtml += '&#10025;';
+            } else {
+              ratingHtml += '&#10029;';
+            }
+          document.getElementById('iw-rating-row').style.display = '';
+          document.getElementById('iw-rating').innerHTML = ratingHtml;
+          }
+        } else {
+          document.getElementById('iw-rating-row').style.display = 'none';
+        }
+
+        // The regexp isolates the first part of the URL (domain plus subdomain)
+        // to give a short URL for displaying in the info window.
+        if (place.website) {
+          var fullUrl = place.website;
+          var website = hostnameRegexp.exec(place.website);
+          if (website === null) {
+            website = 'http://' + place.website + '/';
+            fullUrl = website;
+          }
+          document.getElementById('iw-website-row').style.display = '';
+          document.getElementById('iw-website').textContent = website;
+        } else {
+          document.getElementById('iw-website-row').style.display = 'none';
+        }
+      }
+    </script>
+	
+	
+	
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5UnZqO6bmhwXpyreHBSTY9HEJO7iPKwA&libraries=places&callback=initMap"
+        async defer></script>
+		
+	
+
+	
+			        <div class="welcome-section">
+	        	<div class="container" >
+	        		
+
+	        		<div class="row" style="height:25%;">
+	        			<div class="col-md-10">
+	        				<div id="map"></div>
+							
+					</div>
+					
+					 
+	        		<div style="overflow:auto;height:450px;cursor:pointer;">
+<table id="resultsTable"  >
+								<tbody id="results"></tbody>
+						</table>	
+						</div>
+   </div>
+	       
+	</div></div>	
+	        <div class="welcome-section">
+	        	<div class="container">
+	        		<div class="section-title wow fadeInUp">
+	        			<h2 class="p-color">Welcome to Parkjin</h2>
+	        			<h5>DISCOVER AMAZING SPACES</h5>
+	        		</div> 
+
+	        		<div class="row">
+	        			<div class="col-md-6">
+	        				<img src="img/search.png"></div><br><br><br>
+	        			<div class="col-md-6">
+	        				<h3><font size="10" color="blue">DISCOVER </font><br>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">AMAZING </font><br><font color="blue">SPACES</h3>
+	        				<p text color="white">Find parking anywhere, for now or for later
+Compare prices & pick the place that’s best for you </p>
+	        			</div>
+	        		</div>
+	        	</div> 
+	        </div> 
+			<br>
+<div class="welcome-section" background-color="black" >
+	        	<div class="container">
+	        		
+	        		<div class="row">
+	        			
+	        			<div class="col-md-6">
+	        				<h3><font size="10"color="blue">RESERVE </font><br>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">PREPAY</font><br><font color="blue">& SAVE</h3>
+	        				<p>Book a space in just a few easy clicks
+
+Save up to 50% off standard rates </p>
+	        			</div><div class="col-md-6"><img src="img/car.gif">
+						</div>
+	        	</div> <!-- /.container -->
+	        </div></div> <!-- /.welcome-section -->
+<div class="welcome-section">
+	        	<div class="container">
+	        		
+	        		<div class="row">
+	        			<div class="col-md-6">
+	        		<img src="img/car2.jpg"></div><br><br><br>
+	        			<div class="col-md-6">
+	        				<h3><font size="10"color="blue">DRIVE </font><br>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">ARRIVE</font><br><font color="blue">& PARK</h3>
+	        				<p>Enter easily with your mobile parking pass
+
+Your space is waiting – pull in and go do your thing
+
+Drive, Arrive, Park</p>
+	        			</div>
+	        	</div> <!-- /.container -->
+	        </div> <!-- /.welcome-section -->
+
+
+
+
+	        <!-- Information Banner _______________________ -->
+	        <div class="information-banner wow fadeInUp">
+	        	<div class="container">
+<div class="col-md-7 ">
+	        		<h3><font color="red">Download the FREE ParkWhiz App</font><br>
+<font color="black">Tap into awesome parking anywhere on iOS & Android.
+
+Text yourself a link to download.
+</h3></font>
+	        		<a href="contact-us.html" class="p-color-bg tran3s wow fadeInUp">Contact us</a>
+</div>	        <div class="col-md-3">
+	        		<img src="img/pho.jpg">
+</div>	        	</div> <!-- /.container -->
+	        </div> <!-- /.information-banner -->
+
+
+	        
+
+	        <!-- Footer ______________________________ -->
+	        <footer>
+	        	<div class="top-footer">
+	        		<div class="container">
+	        			<div class="row">
+	        				<div class="col-md-6">
+	        					<h4>About Parkjin</h4>
+	<center><img src="img/plogo.png"> </center>       				</div> <!-- /.footer-about -->
+
+	        				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footer-contact">
+	        					<h4>CONTACT US</h4>
+	        					<ul>
+	        						<li>
+	        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+	        							<a href="#" class="tran3s">info@mail.com</a>
+	        						</li>
+	        						<li><i class="fa fa-map-marker" aria-hidden="true"></i>INDIA</li>
+	        					</ul>
+	        				</div> <!-- /.footer-contact -->
+
+	        				<div class="col-lg-2 col-md-6 col-sm-6 col-xs-12 footer-quick-link">
+	        					<h4>Quick link</h4>
+	        					<ul>
+	        						<li><a href="#" class="tran3s"><i class="fa fa-caret-right" aria-hidden="true"></i> Our Site</a></li>
+	        						<li><a href="#" class="tran3s"><i class="fa fa-caret-right" aria-hidden="true"></i> News/Blog</a></li>
+	        				</div> <!-- /.footer-quick-link -->
+
+	        				<!-- /.item -->  
+									</div>
+								</div> <!-- /#footer-event-carousel -->
+	        				</div> <!-- /.footer-event -->
+	        			</div> <!-- /.row -->
+	        		</div> <!-- /.container -->
+	        	</div> <!-- /.top-footer -->
+
+	        	<div class="bottom-footer">
+	        		<p>Copyright 2018 &copy; <a href="#" class="tran3s" target="_blank"></a> <span></span> Designed by <span class="p-color">PARKJIN</span></p>
+	        	</div> <!-- /.bottom-footer -->
+	        </footer>
+
+	        <!-- Scroll Top Button -->
+			<button class="scroll-top tran3s p-color-bg">
+				<i class="fa fa-angle-up" aria-hidden="true"></i>
+			</button>
+			<!-- pre loader  -->
+		 
+
+
+
+
+		<!-- Js File_________________________________ -->
+
+		<!-- j Query -->
+		<script type="text/javascript" src="vendor/jquery-2.1.4.js"></script>
+
+		<!-- Bootstrap JS -->
+		<script type="text/javascript" src="vendor/bootstrap/bootstrap.min.js"></script>
+
+		<!-- Vendor js _________ -->
+		<!-- revolution -->
+		<script src="vendor/revolution/jquery.themepunch.tools.min.js"></script>
+		<script src="vendor/revolution/jquery.themepunch.revolution.min.js"></script>
+		<script type="text/javascript" src="vendor/revolution/revolution.extension.slideanims.min.js"></script>
+		<script type="text/javascript" src="vendor/revolution/revolution.extension.layeranimation.min.js"></script>
+		<script type="text/javascript" src="vendor/revolution/revolution.extension.navigation.min.js"></script>
+		<script type="text/javascript" src="vendor/revolution/revolution.extension.kenburn.min.js"></script>
+		<script type="text/javascript" src="vendor/revolution/revolution.extension.actions.min.js"></script>
+
+		<!-- Google map js -->
+		<!-- Bootstrap Select JS -->
+		<script type="text/javascript" src="vendor/bootstrap-select/dist/js/bootstrap-select.js"></script>
+		<!-- Time picker -->
+		<script type="text/javascript" src="vendor/time-picker/jquery.timepicker.min.js"></script>
+		<!-- WOW js -->
+		<script type="text/javascript" src="vendor/WOW-master/dist/wow.min.js"></script>
+		<!-- owl.carousel -->
+		<script type="text/javascript" src="vendor/owl-carousel/owl.carousel.min.js"></script>
+		<!-- js count to -->
+		<script type="text/javascript" src="vendor/jquery.appear.js"></script>
+		<script type="text/javascript" src="vendor/jquery.countTo.js"></script>
+
+		<!-- Theme js -->
+		<script type="text/javascript" src="js/theme.js"></script>
+
+		</div> <!-- /.main-page-wrapper -->
+	</body>
+</html>
